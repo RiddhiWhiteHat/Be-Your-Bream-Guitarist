@@ -1,0 +1,64 @@
+body{
+	background: #FFD117;
+}
+
+.wrap {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+}
+
+svg {
+	flex: 1;
+	transition: all 2s ease-in-out;
+}
+
+svg:hover {
+	flex-grow: 2;
+}
+
+.notes, .sparks {
+	opacity: 0;
+}
+
+#Bass_Guitar_1_ {
+	cursor: pointer;
+	animation: hover 3.5s infinite linear;
+}
+
+#bass_shadow {
+	animation: shadow 3.5s infinite linear;
+	transform-origin: 50% 50%;
+}
+
+#guitar_shadow {
+	animation: shadow 4s infinite linear;
+	transform-origin: 50% 50%;
+}
+
+#guitar_2_ {
+	cursor: pointer;
+	animation: hover 4s infinite linear;
+}
+
+@keyframes hover {
+	from, to {
+		transition-timing-function: ease-in-out;
+		transform: translate3d(0,0,0);
+	}
+	50% {
+		transition-timing-function: ease-in-out;
+		transform: translate3d(0,1.5%,0);
+	}
+}
+
+@keyframes shadow {
+	from, to {
+		transition-timing-function: ease-in-out;
+		transform: scale(0.95,1);
+	}
+	50% {
+		transition-timing-function: ease-in-out;
+		transform: scale(1.05,1);
+	}
+}

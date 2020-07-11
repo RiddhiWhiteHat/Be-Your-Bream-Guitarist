@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/Tile.png" type="image/x-icon" />
+    <title>Tile Editor</title>
+    <style>
+        * {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 1em;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF9E4), to(#EEEED8));
+  background: linear-gradient(180deg, #FFF9E4 0%, #EEEED8 100%);
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-around;
+  color: #2f2c48;
+}
+
+.instructions {
+  font-size: 0.8em;
+  color: #aaa;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  padding-bottom: 16px;
+}
+.card header {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1em;
+  padding: 16px;
+}
+.card header h1 {
+  margin: 0;
+}
+.card header .button-as-link {
+  margin-right: 1em;
+}
+.card aside {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.card_body {
+  display: -webkit-box;
+  display: flex;
+}
+
+.card_right-column {
+  padding-right: 16px;
+}
+
+canvas {
+  background: #f4f8f9;
+}
+
+.tileset-container {
+  position: relative;
+}
+
+.tileset-container_selection {
+  position: absolute;
+  outline: 3px solid cyan;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.layers {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.layers button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  font-family: inherit;
+  outline: 0;
+  background: transparent;
+  border: 0;
+  padding: 8px 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.layers button.active {
+  font-weight: bold;
+  color: #0884f1;
+}
+
+.button-as-link {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  text-decoration: underline;
+  background: transparent;
+  color: #7f808e;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.primary-button {
+  border: 0;
+  background: #4e84fa;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid #3166c7;
+  color: #fff;
+  border-radius: 6px;
+  outline: 0;
+  padding: 6px 16px;
+  cursor: pointer;
+}
+
+label {
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  display: block;
+}
+
+.btntab {
+  background:rgb(107, 24, 163);
+  background-image: -webkit-linear-gradient(top,rgb(136, 27, 214), rgb(93, 30, 134));
+  background-image: -moz-linear-gradient(top,rgb(136, 27, 214) rgb(93, 30, 134));
+  background-image: -ms-linear-gradient(top,rgb(136, 27, 214), rgb(93, 30, 134));
+  background-image: -o-linear-gradient(top,rgb(136, 27, 214), rgb(93, 30, 134));
+  background-image: linear-gradient(to bottom,rgb(136, 27, 214), rgb(93, 30, 134));
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  -webkit-box-shadow: 0px 1px 5px #666666;
+  -moz-box-shadow: 0px 1px 5px #666666;
+  box-shadow: 0px 1px 5px #666666;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 10px 20px 10px 20px;
+  border: dotted #ded5de 3px;
+  text-decoration: none;
+  position:absolute;
+  transition: .5s ease;
+  left: 20px;
+  top: 700px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="card">
+   
+        <header>
+           <h1>Tile Map Editor</h1>
+           <div>
+     <button class="button-as-link" onclick="clearCanvas()">Clear Canvas</button>
+              <button class="primary-button" onclick="exportImage()">Export Image</button>
+           </div>
+        </header>
+        <div class="card_body">
+           <aside>
+              <label>Tiles</label>
+              <div class="tileset-container">
+                 <img id="tileset-source" crossorigin />
+                 <div class="tileset-container_selection"></div>
+              </div>
+           </aside>
+           <div class="card_right-column">
+              <!-- The main canvas -->
+              <canvas width="480" height="480">
+              </canvas>
+              <p class="instructions">
+                 <strong>Click</strong> to paint.
+                 <strong>Shift+Click</strong> to remove.
+              </p>
+              <!-- UI for layers -->
+              <div>
+                 <label>Editing Layer:</label>
+                 <ul class="layers">
+                    <li><button onclick="setLayer(2)" class="layer" tile-layer="2">Top Layer</button></li>
+                    <li><button onclick="setLayer(1)" class="layer" tile-layer="1">Middle Layer</button></li>
+                    <li><button onclick="setLayer(0)" class="layer" tile-layer="0">Bottom Layer</button></li>
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
+     <a href="index.html" class="btntab">Back To Home Page</a>
+     <script src="Offline.js"></script>
+</body>
+</html>

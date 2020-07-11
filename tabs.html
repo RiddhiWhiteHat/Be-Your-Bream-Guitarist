@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Your Own Tabs!</title>
+    <link rel="icon" href="images/Tabs.png" type="image/x-icon" />
+  
+    <style>
+        html {
+        background-image: url("images/1st Bg.jpg");
+        background-position: 50% 0%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        }
+
+        body {
+        max-width: 580px;
+        margin: 2em auto;
+        border: 1px solid #555;
+        border-radius: 5px; 
+        background-image: url("images/2nd Bg.jpg");
+        }
+
+        .tab {
+        white-space: pre;
+        font-family: monospace;
+        position: relative;
+        color:rgb(45, 31, 124);
+        }
+
+        .tab input {
+        width: 1em;
+        height: 1em;
+        outline: none;
+        color: rgb(45, 31, 124);
+        }
+
+        .tab span {
+        cursor: pointer;
+        transform: translateY(-25%);
+        color: rgb(45, 31, 124);
+        }
+
+        body {
+        padding: 1em;
+        color: rgb(45, 31, 124);
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Guitar Tab Generator</h2>
+<ul>
+  <li>Click to edit tabs</li>
+  <li>Drag to rearrange the tab Numbers</li>
+</ul>
+<button class='add-row'>Add Row</button>
+<button class='clear'>Clear</button>
+<button class='download'>Download</button>
+<div class='tab'></div>
+<script src="tabs.js"></script>
+    
+</body>
+</html>
